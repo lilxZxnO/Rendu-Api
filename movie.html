@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="movie"></div>
+    <script>
+      function fetchMovie() {
+        return fetch('https://api.themoviedb.org/3/movie/550?api_key=ae04940afcea680c6730db66403ef0ec')
+          .then((response) => response.json());
+      }
+      async function displayMovie(movie) {
+        const api_key = 'ae04940afcea680c6730db66403ef0ec'
+        const data = await fetchMovie(movie, api_key);
+        console.log(data);
+        document.querySelector("#movie").innerHTML = `
+        <h1>${data.title}</h1>
+        <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}" alt="${data.title}">
+        `
+      }
+        displayMovie(550);
+    </script>
+  </body>
+</html>
